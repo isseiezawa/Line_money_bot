@@ -23,15 +23,16 @@ class LinebotController < ApplicationController
 
     events.each { |event|
       userId = event['source']['userId']  #userId取得
-      p 'UserID: ' + userId # UserIdを確認
-      p 'いっせい'
       case event
       when Line::Bot::Event::Message
         case event.type
         when Line::Bot::Event::MessageType::Text
+
+          main_action(event)
+
           message = {
             type: 'text',
-            text: event.message['text']
+            text: @response
           }
           client.reply_message(event['replyToken'], message)
         end
@@ -39,5 +40,20 @@ class LinebotController < ApplicationController
     }
 
     head :ok
+  end
+
+  private
+
+  def main_action(event)
+
+    @user = User.find_or_create_by(line_id: event['source']['userId'])
+    text = event.message['text']
+
+    if @user.name.nil?
+      @response = '名前を教えてね。'
+      @user.name!
+    end
+
+    @response
   end
 end
