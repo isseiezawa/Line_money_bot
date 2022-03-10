@@ -22,7 +22,7 @@ class LinebotController < ApplicationController
     events = client.parse_events_from(body)
 
     events.each { |event|
-      userId = event['source']['userId']  #userId取得
+      p event['source']['userId']  #userId取得
       case event
       when Line::Bot::Event::Message
         case event.type
@@ -48,13 +48,6 @@ class LinebotController < ApplicationController
 
     @user = User.find_or_create_by(line_id: event['source']['userId'])
     text = event.message['text']
-
-    if @user.name.nil?
-      @response = '名前を教えてね。'
-      break
-    end
-
-
 
     @response
   end
