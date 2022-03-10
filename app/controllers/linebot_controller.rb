@@ -68,16 +68,24 @@ class LinebotController < ApplicationController
         end
       end
 
-      if text == '収支'
+      case text
+      when '日収支'
+        hash = @user.moneys.group("EXTRACT(year FROM created_at), EXTRACT(month FROM created_at), EXTRACT(day FROM created_at)").sum(:yen)
+        @response = "#{@user.name}様　日にちごとの収支\r\n"
+        hash.each do |date, value|
+          @response << "|　#{date.to_i}日分　|　#{value}円　|"
+        end
+      end
+      when '月収支'
         hash = @user.moneys.group("EXTRACT(year FROM created_at), EXTRACT(month FROM created_at)").sum(:yen)
-        @response = "#{@user.name}様　収支\r\n"
+        @response = "#{@user.name}様　月ごとの収支\r\n"
         hash.each do |date, value|
           @response << "|　#{date.to_i}月分　|　#{value}円　|"
         end
       end
-
-      if text == '収支大爆発'
+      when '収支大爆発'
         @user.moneys.destroy_all
+      end
     end
 
     @response
