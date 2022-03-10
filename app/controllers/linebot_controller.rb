@@ -73,13 +73,13 @@ class LinebotController < ApplicationController
         hash = @user.moneys.group("EXTRACT(year FROM created_at), EXTRACT(month FROM created_at), EXTRACT(day FROM created_at)").sum(:yen)
         @response = "#{@user.name}様　日にちごとの収支\r\n"
         hash.each do |date, value|
-          @response << "|　#{date.to_i}日分　|　#{value}円　|"
+          @response << "#{date.to_i}日分……#{value}円\r\n"
         end
       when '月収支'
         hash = @user.moneys.group("EXTRACT(year FROM created_at), EXTRACT(month FROM created_at)").sum(:yen)
         @response = "#{@user.name}様　月ごとの収支\r\n"
         hash.each do |date, value|
-          @response << "|　#{date.to_i}月分　|　#{value}円　|"
+          @response << "#{date.to_i}月分……#{value}円\r\n"
         end
       when '収支大爆発'
         @user.moneys.destroy_all
