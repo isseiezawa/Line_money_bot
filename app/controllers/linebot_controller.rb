@@ -56,6 +56,12 @@ class LinebotController < ApplicationController
       @response = "#{text}さんだね！\r\n名前覚えたよ。"
       @user.update(name: text)
       @user.exist_name!
+    when 'exist_name'
+      if text.end_with?('円')
+        t = text.split
+        @user.moneys.create(name: t[0], yen: t[1].gsub(/[^\d]/, "").to_i)
+        @response = "何に使ったか：#{t[0]}\r\n金額：#{t[1]}\r\n保存したよ！"
+      end
     end
 
     @response
