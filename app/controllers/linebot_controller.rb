@@ -47,6 +47,11 @@ class LinebotController < ApplicationController
 
     @user = User.find_or_create_by(line_id: event['source']['userId'])
     text = event.message['text']
-    @response = text
+
+    if @user.name.nil?
+      @response = '名前を教えてね'
+    end
+
+    @response
   end
 end
