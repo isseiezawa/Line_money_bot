@@ -46,7 +46,6 @@ class LinebotController < ApplicationController
 
   def main_action(event)
 
-    @user = User.find_or_create_by(line_id: event['source']['userId'])
     text = event.message['text']
 
     @response
