@@ -81,6 +81,11 @@ class LinebotController < ApplicationController
         hash.each do |date, value|
           @response << "#{date.to_i}月分……#{value}円\r\n"
         end
+      when '全収支'
+        @response = "#{@user.name}様の全収支です\r\n"
+        @user.moneys.each do |money|
+          @response << "#{money.created_at.month} | #{money.name}:#{money.yen} |\r\n"
+        end
       when '収支大爆発'
         @user.moneys.destroy_all
         @response = "#{@user.name}様の収支が消滅しました。\r\n\\|ﾎﾞｶｰﾝ|//"
