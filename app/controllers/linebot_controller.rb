@@ -61,10 +61,10 @@ class LinebotController < ApplicationController
         t = text.split(/[[:blank:]]/)
         if t[0] == '収入'
           @user.moneys.create(name: t[0], yen: t[1].gsub(/[^\d]/, "").to_i)
-          @response = "#{@user.name}様\r\n入金：#{t[0]}\r\n金額：#{t[1]}\r\n保存したよ！\r\n入金ID：#{@user.moneys.last}"
+          @response = "#{@user.name}様\r\n#{t[0]}\r\n金額：#{t[1]}\r\n入金ID：#{@user.moneys.last.id}\r\n\r\n保存しました！"
         else
           @user.moneys.create(name: t[0], yen: t[1].gsub(/[^\d]/, "").to_i * -1)
-          @response = "#{@user.name}様\r\n出金：#{t[0]}\r\n金額：#{t[1]}\r\n保存したよ！\r\n支出ID：#{@user.moneys.last}"
+          @response = "#{@user.name}様\r\n出金：#{t[0]}\r\n金額：#{t[1]}\r\n支出ID：#{@user.moneys.last.id}\r\n\r\n保存しました！"
         end
       end
     end
