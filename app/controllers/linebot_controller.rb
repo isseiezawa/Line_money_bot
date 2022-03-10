@@ -51,8 +51,10 @@ class LinebotController < ApplicationController
 
     if @user.name.nil?
       @response = '名前を教えてね。'
-      @user.name!
+      break
     end
+
+
 
     @response
   end
