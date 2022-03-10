@@ -48,7 +48,5 @@ class LinebotController < ApplicationController
     @user = User.find_or_create_by(line_id: event['source']['userId'])
     text = event.message['text']
     @response = text
-
-    @response
   end
 end
