@@ -22,7 +22,6 @@ class LinebotController < ApplicationController
     events = client.parse_events_from(body)
 
     events.each { |event|
-      p event['source']['userId']  #userId取得
       case event
       when Line::Bot::Event::Message
         case event.type
@@ -46,7 +45,9 @@ class LinebotController < ApplicationController
 
   def main_action(event)
 
+    @user = User.find_or_create_by(line_id: event['source']['userId'])
     text = event.message['text']
+    @response = text
 
     @response
   end
