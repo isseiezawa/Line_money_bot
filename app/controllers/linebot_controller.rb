@@ -75,6 +75,9 @@ class LinebotController < ApplicationController
           @response << "|　#{date.to_i}月分　|　#{value}円　|"
         end
       end
+
+      if text == '収支大爆発'
+        @user.moneys.destroy_all
     end
 
     @response
