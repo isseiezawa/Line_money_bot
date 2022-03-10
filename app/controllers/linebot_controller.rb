@@ -48,11 +48,13 @@ class LinebotController < ApplicationController
     @user = User.find_or_create_by(line_id: event['source']['userId'])
     text = event.message['text']
 
-    if @user.no_name?
+    case @user.name_status
+    when 'no_name'
       @response = '名前を教えてね'
       @user.catch_name!
-    elsif @user.catch_name?
-    @response = "#{text}さんだね！\r\n名前覚えたよ。"
+    when 'catch_name'
+      @response = "#{text}さんだね！\r\n名前覚えたよ。"
+      @user.update(name: text)
       @user.exist_name!
     end
 
