@@ -70,8 +70,9 @@ class LinebotController < ApplicationController
 
       if text == '収支'
         hash = @user.moneys.group("EXTRACT(year FROM created_at), EXTRACT(month FROM created_at)").sum(:yen)
+        @response = "#{@user.name}様　収支\r\n"
         hash.each do |date, value|
-          @response = "| #{date.to_i}月分 | #{value}円 |"
+          @response = "|　#{date.to_i}月分　|　#{value}円　|"
         end
       end
     end
