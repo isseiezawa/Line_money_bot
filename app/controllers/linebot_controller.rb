@@ -83,6 +83,7 @@ class LinebotController < ApplicationController
         end
       when '収支大爆発'
         @user.moneys.destroy_all
+        @response = "#{@user.name}様の収支が消滅しました。\r\n\\|ﾎﾞｶｰﾝ|//"
       end
     end
 
