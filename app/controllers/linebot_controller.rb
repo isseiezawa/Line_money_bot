@@ -67,6 +67,13 @@ class LinebotController < ApplicationController
           @response = "#{@user.name}様\r\n出金：#{t[0]}\r\n金額：#{t[1]}\r\n支出ID：#{@user.moneys.last.id}\r\n\r\n保存しました！"
         end
       end
+
+      if text == '収支'
+        hash = Money.group("EXTRACT(year FROM created_at) = EXTRACT(month FROM created_at)").sum(:yen)
+        hash.each do |date, value|
+          @response = "#{date}分:#{value}円\r\n"
+        end
+      end
     end
 
     @response
