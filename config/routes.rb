@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root 'moneys#new'
+  root 'users#new'
   post '/callback' => 'linebot#callback'
-  resources :moneys, only: %i(index create)
+  resources :users, only: %i(new create show)
 end

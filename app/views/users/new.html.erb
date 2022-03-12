@@ -1,4 +1,4 @@
-<%= form_with url: moneys_path do |f| %>
+<%= form_with url: users_path do |f| %>
   <div>
     <%= f.label :name, Money.human_attribute_name(:name) %><br>
     <%= f.text_field :name, placeholder: '(例)自動販売機' %>
@@ -7,4 +7,6 @@
     <%= f.label :yen, Money.human_attribute_name(:yen) %><br>
     <%= f.text_field :yen, placeholder: '(例)100' %>
   </div>
+  <br>
+  <%= f.button 'ログイン' %>
 <% end %>
