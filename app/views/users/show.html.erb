@@ -26,10 +26,15 @@
   EOS
   %>
   <% graf = [] %>
-  <% user_plus_yen = @user.moneys.sum(:plus_yen) || 0 %>
+  <% user_plus_yen = @user.moneys.sum(:plus_yen) %>
   <% ActiveRecord::Base.connection.select_all(sql).to_a.each do |a| %>
     <% user_plus_yen += a.values[1] %>
     <% graf << [a.values[0], user_plus_yen] %>
   <% end %>
-  <%= area_chart graf, empty: "No data", thousands: ",", colors: ["#d5edd5"], title: "グラフ(設定金額：#{@user.moneys.pluck(:plus_yen).last}円)", xtitle: "月/日", ytitle: "金額" %>
+  <%= area_chart graf, empty: "No data",
+                       thousands: ",",
+                       colors: ["#d5edd5"],
+                       title: "グラフ(設定金額：#{@user.moneys.pluck(:plus_yen).last}円)",
+                       xtitle: "月/日",
+                       ytitle: "金額" %>
 </div>
