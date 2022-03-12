@@ -69,6 +69,9 @@ class LinebotController < ApplicationController
       end
 
       case text
+      when '名前変更'
+        @response = "#{@user.name} 様 の名前変更します。\r\n名前を入力してね"
+        @user.catch_name!
       when '日収支'
         hash = @user.moneys.group("EXTRACT(year FROM created_at), EXTRACT(month FROM created_at), EXTRACT(day FROM created_at)").sum(:yen)
         @response = "#{@user.name}様　日にちごとの収支\r\n"
