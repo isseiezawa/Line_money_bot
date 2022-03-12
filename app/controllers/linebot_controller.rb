@@ -73,13 +73,13 @@ class LinebotController < ApplicationController
         @response = "#{@user.name} 様 の名前変更します。\r\n名前を入力してね"
         @user.catch_name!
       when '日収支'
-        hash = @user.moneys.group("EXTRACT(year FROM created_at), EXTRACT(month FROM created_at), EXTRACT(day FROM created_at)").sum(:yen)
+        hash = @user.moneys.year_month_day_serch
         @response = "#{@user.name}様　日にちごとの収支\r\n"
         hash.each do |date, value|
           @response << "#{date.to_i}日分…#{value}円\r\n"
         end
       when '月収支'
-        hash = @user.moneys.group("EXTRACT(year FROM created_at), EXTRACT(month FROM created_at)").sum(:yen)
+        hash = @user.moneys.year_month_serch
         @response = "#{@user.name}様　月ごとの収支\r\n"
         hash.each do |date, value|
           @response << "#{date.to_i}月分…#{value}円\r\n"
