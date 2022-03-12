@@ -77,6 +77,11 @@ class LinebotController < ApplicationController
           @response = "#{@user.name}様\r\n出金：#{t[0]}\r\n金額：#{t[1]}\r\n支出ID：#{@user.moneys.last.id}\r\n\r\n保存しました！"
         end
       end
+      if text.end_with?('削除')
+        t = text.split(/[[:blank:]]/)
+        @user.moneys.find(t[0]).destroy if !!(/^[0-9]+$/ =~ t[0].to_s)
+        @response = "ID：#{t[0]} を削除しました"
+      end
 
       case text
       when '名前変更'
