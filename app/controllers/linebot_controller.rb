@@ -96,7 +96,8 @@ class LinebotController < ApplicationController
         end
       when '全収支'
         @response = "#{@user.name}様の全収支です\r\n"
-        @user.moneys.each do |money|
+        user_moneys = user.moneys.order('id DESC')
+        user_moneys.each do |money|
           @response << "#{money.created_at.month}月#{money.created_at.day}日 #{money.name}…#{money.yen}円\r\n"
         end
       when '収支大爆発'
