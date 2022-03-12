@@ -79,8 +79,12 @@ class LinebotController < ApplicationController
       end
       if text.end_with?('削除')
         t = text.split(/[[:blank:]]/)
-        @user.moneys.find(t[0]).destroy if !!(/^[0-9]+$/ =~ t[0].to_s)
-        @response = "ID：#{t[0]} を削除しました"
+        if !!(/^[0-9]+$/ =~ t[0].to_s)
+          @user.moneys.find(t[0]).destroy
+          @response = "ID：#{t[0]} を削除しました"
+        else
+          @response = '削除に失敗しました。\r\n(例)「18　削除」'
+        end
       end
 
       case text
