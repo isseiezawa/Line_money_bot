@@ -65,11 +65,11 @@ class LinebotController < ApplicationController
         elsif !!(/^[0-9]+$/ =~ t[0].to_s)
           if t[1] == '設定'
             money = @user.moneys.find(t[0])
-            money.update(name: t[1], yen: 0, plus_yen: t[2].gsub(/[^\d]/, "").to_i)
+            money.create(name: t[1], yen: 0, plus_yen: t[2].gsub(/[^\d]/, "").to_i)
             @response = "#{@user.name}様\r\n#{t[1]}\r\n金額：#{t[2]}\r\n入金ID：#{t[0]}\r\n\r\n編集しました！"
           else
             money = @user.moneys.find(t[0])
-            money.update(name: t[1], yen: t[2].gsub(/[^\d]/, "").to_i * -1, plus_yen: 0)
+            money.create(name: t[1], yen: t[2].gsub(/[^\d]/, "").to_i * -1, plus_yen: 0)
             @response = "#{@user.name}様\r\n出金：#{t[1]}\r\n金額：#{t[2]}\r\n支出ID：#{t[0]}\r\n\r\n編集しました！"
           end
         else
