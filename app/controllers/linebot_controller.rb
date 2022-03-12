@@ -83,7 +83,7 @@ class LinebotController < ApplicationController
           @user.moneys.find(t[0]).destroy
           @response = "ID：#{t[0]} を削除しました"
         else
-          @response = '削除に失敗しました。\r\n(例)「18　削除」'
+          @response = "削除に失敗しました。\r\n(例)「18　削除」"
         end
       end
 
