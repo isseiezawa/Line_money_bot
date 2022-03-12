@@ -23,6 +23,10 @@ td.id {
   text-align: center;
 }
 
+td.created_at {
+  text-align: center;
+}
+
 td.name {
   text-align: center;
 }

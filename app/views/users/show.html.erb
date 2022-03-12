@@ -1,5 +1,5 @@
 <h1><%= @user.name %>様 収支</h1>
-<table border="2">
+<table border="2" width="100%">
   <tr>
     <th>ID</th>
     <th>使用年月日</th>
@@ -9,7 +9,7 @@
   <% @user.moneys.order('created_at desc').each do |money| %>
     <tr>
       <td class="id"><%= money.id %></td>
-      <td><%= money.created_at.strftime('%Y/%m/%d %H:%M') %></td>
+      <td class="created_at"><%= money.created_at.strftime('%Y/%m/%d %H:%M') %></td>
       <td class="name"><%= money.name %></td>
       <td class="yen-align"><%= "#{money.yen}円" %></td>
     </tr>
