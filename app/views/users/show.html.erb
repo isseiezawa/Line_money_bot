@@ -9,7 +9,7 @@
     <tr>
       <td><%= money.created_at.strftime('%Y/%m/%d %H:%M') %></td>
       <td><%= money.name %></td>
-      <td><%= money.yen %></td>
+      <td><%= "#{money.yen}円" %></td>
     </tr>
   <% end %>
 </table>
