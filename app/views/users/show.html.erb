@@ -1,4 +1,4 @@
-<%= @user.name %>様
+<h1><%= @user.name %>様 収支</h1>
 <table border="2">
   <tr>
     <th>ID</th>
@@ -8,12 +8,28 @@
   </tr>
   <% @user.moneys.order('created_at desc').each do |money| %>
     <tr>
-      <td><%= money.id %></td>
+      <td class="id"><%= money.id %></td>
       <td><%= money.created_at.strftime('%Y/%m/%d %H:%M') %></td>
-      <td><%= money.name %></td>
-      <td><%= "#{money.yen}円" %></td>
+      <td class="name"><%= money.name %></td>
+      <td class="yen-align"><%= "#{money.yen}円" %></td>
     </tr>
   <% end %>
 </table>
-
-<%= line_chart @user.moneys.year_month_day_serch %>
+<div>
+  <% sql = <<-"EOS"
+  SELECT 
+  to_char(created_at, 'YYYY/MM/DD') AS month,
+  sum(yen) as total_yen
+  from money WHERE "money"."user_id" = #{@user.id}
+  group by to_char(created_at, 'YYYY/MM/DD')
+  order by month ASC;
+  EOS
+  %>
+  <% graf = [] %>
+  <% user_plus_yen = @user.moneys.sum(:plus_yen) || 0 %>
+  <% ActiveRecord::Base.connection.select_all(sql).to_a.each do |a| %>
+    <% user_plus_yen += a.values[1] %>
+    <% graf << [a.values[0], user_plus_yen] %>
+  <% end %>
+  <%= area_chart graf, empty: "No data", thousands: ",", colors: ["#d5edd5"], title: "グラフ(設定金額：#{@user.moneys.pluck(:plus_yen).last}円)", xtitle: "月/日", ytitle: "金額" %>
+</div>

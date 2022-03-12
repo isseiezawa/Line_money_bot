@@ -18,3 +18,15 @@
   color: aliceblue;
   background-color: crimson;
 }
+
+td.id {
+  text-align: center;
+}
+
+td.name {
+  text-align: center;
+}
+
+td.yen-align {
+  text-align: right;
+}
