@@ -1,0 +1,13 @@
+ja:
+  views:
+    moneys:
+      name: '名前'
+      yen: '円'
+  activerecord:
+    models:
+      user: 'ユーザー'
+      money: '金'
+    attributes:
+      money:
+        name: '使用箇所'
+        yen: '円'
