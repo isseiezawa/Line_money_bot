@@ -92,9 +92,16 @@ class LinebotController < ApplicationController
       when '収支大爆発'
         @user.moneys.destroy_all
         @response = "#{@user.name}様の収支が消滅しました。\r\n\\|ﾎﾞｶｰﾝ|//"
+      
+      when 'いちご' || '苺' || 'イチゴ'
+        @response = strawberry_random
       end
     end
 
     @response
+  end
+
+  def strawberry_random
+    %w[あまおう 紅ほっぺ さがほのか いちごさん さぬきひめ スカイベリー ワイルドストロベリー ゆめのか 天使のいちご とちおとめ].sample
   end
 end
