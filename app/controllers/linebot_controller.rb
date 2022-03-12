@@ -93,7 +93,7 @@ class LinebotController < ApplicationController
         @user.moneys.destroy_all
         @response = "#{@user.name}様の収支が消滅しました。\r\n\\|ﾎﾞｶｰﾝ|//"
       
-      when 'いちご' || '苺' || 'イチゴ'
+      when 'いちご', '苺', 'イチゴ'
         @response = strawberry_random
       end
     end
