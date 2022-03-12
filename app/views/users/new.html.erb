@@ -1,5 +1,8 @@
 <%= form_with url: users_path do |f| %>
   <div>
+    <p>最後に入力したデータを入力してね！</p>
+  </div>
+  <div>
     <%= f.label :name, Money.human_attribute_name(:name) %><br>
     <%= f.text_field :name, placeholder: '(例)自動販売機' %>
   </div>
