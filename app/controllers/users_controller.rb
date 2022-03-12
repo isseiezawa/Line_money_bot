@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   def create
     user_params = User.find_by(name: params[:user_name])
     @money = Money.find_by(name: params[:money_name], yen: params[:yen])
-    if @money && @money&.user == user_params
+    if @money && @money == user_last_money && @money&.user == user_params
       @user = User.find(@money.user_id)
       redirect_to user_path(@user)
     else

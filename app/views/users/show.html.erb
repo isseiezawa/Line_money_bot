@@ -34,7 +34,7 @@
   <%= area_chart graf, empty: "No data",
                        thousands: ",",
                        colors: ["#d5edd5"],
-                       title: "グラフ(設定金額：#{@user.moneys.pluck(:plus_yen).last}円)",
+                       title: "グラフ(設定金額：#{@user.moneys.sum(:plus_yen)}円)",
                        xtitle: "月/日",
                        ytitle: "金額" %>
 </div>
