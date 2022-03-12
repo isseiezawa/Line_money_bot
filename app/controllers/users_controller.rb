@@ -4,12 +4,13 @@ class UsersController < ApplicationController
   def new; end
 
   def create
-    money = Money.find_by(name: params[:name], yen: params[:yen])
-    if money
-      @user = User.find(money.user_id)
+    @money = Money.find_by(name: params[:name], yen: params[:yen])
+    if @money && @money == user_last_money
+      @user = User.find(@money.user_id)
       redirect_to user_path(@user)
     else
-      render :new
+      flash[:alert] = '検索に失敗しました。'
+      redirect_to new_user_path
     end
   end
 
@@ -17,5 +18,9 @@ class UsersController < ApplicationController
 
   def set_user
     @user = User.find(params[:id])
+  end
+
+  def user_last_money
+    User.find(@money.user_id).moneys.last if @money
   end
 end
