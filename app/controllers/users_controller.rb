@@ -4,9 +4,9 @@ class UsersController < ApplicationController
   def new; end
 
   def create
-    @money = Money.find_by(name: params[:name], yen: params[:yen])
-    if @money && @money == user_last_money
-      @user = User.find(@money.user_id)
+    user_params = User.find_by(name: params[:user_name])
+    @money = Money.find_by(name: params[:money_name], yen: params[:yen])
+    if @money && @money == user_last_money && @money&.user == user_params
       redirect_to user_path(@user)
     else
       flash[:alert] = '検索に失敗しました。'

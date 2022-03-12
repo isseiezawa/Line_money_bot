@@ -8,6 +8,8 @@ ja:
       user: 'ユーザー'
       money: '金'
     attributes:
+      user:
+        name: '名前'
       money:
         name: '使用箇所'
         yen: '円'

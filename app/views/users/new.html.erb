@@ -3,8 +3,12 @@
     <p>最後に入力したデータを入力してね！</p>
   </div>
   <div>
-    <%= f.label :name, Money.human_attribute_name(:name) %><br>
-    <%= f.text_field :name, placeholder: '(例)自動販売機' %>
+    <%= f.label :user_name, User.human_attribute_name(:name) %><br>
+    <%= f.text_field :user_name, placeholder: '(例)江澤 一晴' %>
+  </div>
+  <div>
+    <%= f.label :money_name, Money.human_attribute_name(:name) %><br>
+    <%= f.text_field :money_name, placeholder: '(例)自動販売機' %>
   </div>
   <div>
     <%= f.label :yen, Money.human_attribute_name(:yen) %><br>
