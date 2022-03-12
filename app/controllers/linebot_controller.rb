@@ -66,11 +66,11 @@ class LinebotController < ApplicationController
           if t[1] == '収入'
             money = @user.moneys.find(t[0])
             money.update(name: t[1], yen: t[2].gsub(/[^\d]/, "").to_i)
-            @response = "#{@user.name}様\r\n#{t[1]}\r\n金額：#{t[2]}\r\n入金ID：#{@user.moneys.last.id}\r\n\r\n編集しました！"
+            @response = "#{@user.name}様\r\n#{t[1]}\r\n金額：#{t[2]}\r\n入金ID：#{t[0]}\r\n\r\n編集しました！"
           else
             money = @user.moneys.find(t[0])
             money.update(name: t[1], yen: t[2].gsub(/[^\d]/, "").to_i * -1)
-            @response = "#{@user.name}様\r\n出金：#{t[1]}\r\n金額：#{t[2]}\r\n支出ID：#{@user.moneys.last.id}\r\n\r\n編集しました！"
+            @response = "#{@user.name}様\r\n出金：#{t[1]}\r\n金額：#{t[2]}\r\n支出ID：#{t[0]}\r\n\r\n編集しました！"
           end
         else
           @user.moneys.create(name: t[0], yen: t[1].gsub(/[^\d]/, "").to_i * -1)
