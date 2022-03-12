@@ -1,12 +1,14 @@
 <%= @user.name %>様
 <table border="2">
   <tr>
+    <th>ID</th>
     <th>使用年月日</th>
     <th>使用箇所</th>
     <th>いくら使ったか</th>
   </tr>
   <% @user.moneys.order('created_at desc').each do |money| %>
     <tr>
+      <td><%= money.id %></td>
       <td><%= money.created_at.strftime('%Y/%m/%d %H:%M') %></td>
       <td><%= money.name %></td>
       <td><%= "#{money.yen}円" %></td>
