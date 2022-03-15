@@ -15,6 +15,7 @@
     </tr>
   <% end %>
 </table>
+<br>
 <div>
   <% sql = <<-"EOS"
   SELECT 
@@ -30,6 +31,10 @@
   <% ActiveRecord::Base.connection.select_all(sql).to_a.each do |a| %>
     <% user_plus_yen += a.values[1] %>
     <% graf << [a.values[0], user_plus_yen] %>
+  <% end %>
+  <% if user_plus_yen < 0 %>
+    <h2 class="danger">※DANGER※</h2>
+    <p class="danger">設定金額を下回っています</p>
   <% end %>
   <%= area_chart graf, empty: "No data",
                        thousands: ",",

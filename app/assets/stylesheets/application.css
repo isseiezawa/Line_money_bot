@@ -23,6 +23,11 @@
   text-align: center;
 }
 
+.danger {
+  text-align: center;
+  color: red;
+}
+
 tr:nth-child(odd) {
   background-color:  rgba(149, 253, 255, 0.071);    /* 背景色指定 */
 }
