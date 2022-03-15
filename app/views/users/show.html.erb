@@ -11,7 +11,7 @@
       <td class="id"><%= money.id %></td>
       <td class="created_at"><%= money.created_at.strftime('%Y/%m/%d %H:%M') %></td>
       <td class="name"><%= money.name %></td>
-      <td class="yen-align"><%= "#{money.yen}円" %></td>
+      <td class="yen-align"><%= "#{money.yen < 0 ? money.yen : "(#{money.created_at.strftime('%-m月/')}設定)" + money.plus_yen.to_s}円" %></td>
     </tr>
   <% end %>
 </table>
