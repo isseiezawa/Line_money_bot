@@ -19,6 +19,10 @@
   background-color: crimson;
 }
 
+tr:nth-child(odd) {
+  background-color:  rgba(149, 253, 255, 0.071);    /* 背景色指定 */
+}
+
 td.id {
   text-align: center;
 }
